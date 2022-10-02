@@ -24,24 +24,17 @@ Click "download code" for plain PHP or Wordpress and look for:
 
 ```php
 $request = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
-$cloaker = \Cloakings\CloakingsPalladium\PalladiumCloaker(
-    clientId: $clientId,
-    clientCompany: $clientCompany,
-    clientSecret: $clientSecret,
+$cloaker = \Cloakings\CloakingsCloakIt\CloakItCloaker(
+    companyId: $companyId,
 );
 $cloakerResult = $cloaker->handle($request);
 ```
 
 Check if result mode is `CloakModeEnum::Fake` or `CloakModeEnum::Real` and do something with it.
 
-If you want to render result like the original Palladium library
+If you want to render result like the original CloakIT library
 ```php
 $baseIncludeDir = __DIR__; // change to your dir with real.php and fake.php
-$renderer = \Cloakings\CloakingsPalladium\PalladiumRenderer();
+$renderer = \Cloakings\CloakingsCloakIt\CloakItRenderer();
 $response = $renderer->render($cloakerResult);
 ```
-
-If your filenames differ from `real.php` and `fake.php` change params `$fakeTargetContains` and `$realTargetContains`
-in `PalladiumCloaker` constructor.
-
-Default traffic source is `PalladiumTrafficSourceEnum::Adwords` but you can change it to `Facebook` or `Tiktok`.
