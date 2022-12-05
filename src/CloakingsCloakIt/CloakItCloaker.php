@@ -17,10 +17,7 @@ class CloakItCloaker implements CloakerInterface
 
     public function handle(Request $request): CloakerResult
     {
-        $params = $this->collectParams($request);
-        $apiResponse = $this->httpClient->execute($params);
-
-        return $this->createResult($apiResponse);
+        return $this->handleParams($this->collectParams($request));
     }
 
     private function collectParams(Request $request): array
@@ -38,6 +35,13 @@ class CloakItCloaker implements CloakerInterface
             'X_FORWARDED_FOR' => (string)$request->server->get('X_FORWARDED_FOR', ''),
             'TRUE_CLIENT_IP' => (string)$request->server->get('TRUE_CLIENT_IP', ''),
         ];
+    }
+
+    public function handleParams(array $params): CloakerResult
+    {
+        $apiResponse = $this->httpClient->execute($params);
+
+        return $this->createResult($apiResponse);
     }
 
     private function createResult(CloakItApiResponse $apiResponse): CloakerResult
