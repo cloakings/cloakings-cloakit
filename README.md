@@ -38,3 +38,9 @@ $baseIncludeDir = __DIR__; // change to your dir with real.php and fake.php
 $renderer = \Cloakings\CloakingsCloakIt\CloakItRenderer();
 $response = $renderer->render($cloakerResult);
 ```
+
+## Original Logic
+
+Original library is located at `doc/original`.
+
+License for this repository doesn't cover that code.
