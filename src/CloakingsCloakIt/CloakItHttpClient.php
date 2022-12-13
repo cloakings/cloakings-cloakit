@@ -48,6 +48,16 @@ class CloakItHttpClient
         $this->logger->info('cloaking_request', ['service' => 'cloakit', 'result' => $result, 'params' => $params, 'time' => $this->elapsedTime($time)]);
         curl_close($curl);
 
+        $result = array_merge(
+            $result,
+            [
+                'response_status' => 200,
+                'response_headers' => [],
+                'response_body' => $responseString,
+                'response_time' => $this->elapsedTime($time),
+            ],
+        );
+
         return CloakItApiResponse::create($result);
     }
 
